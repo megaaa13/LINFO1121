@@ -54,7 +54,7 @@ public abstract class FList<A> implements Iterable<A> {
     // return the length of the list
     public final int length() {
         // TODO
-         return -1;
+        return -1;
     }
 
     // return the head element of the list
@@ -75,14 +75,19 @@ public abstract class FList<A> implements Iterable<A> {
 
     // return a list on which each element has been applied function f
     public final <B> FList<B> map(Function<A,B> f) {
-        // TODO
-         return null;
+        if (isEmpty())
+            return nil();
+        return tail().map(f).cons(f.apply(head()));
     }
 
     // return a list on which only the elements that satisfies predicate are kept
     public final FList<A> filter(Predicate<A> f) {
-        // TODO
-         return null;
+        if (isEmpty())
+            return nil();
+        if (f.test(head())) {
+            return tail().filter(f).cons(head());
+        }
+        return tail().filter(f);
     }
 
 
@@ -94,13 +99,13 @@ public abstract class FList<A> implements Iterable<A> {
             FList<A> current = FList.this;
 
             public boolean hasNext() {
-                // TODO
-                 return false;
+                return current.isNotEmpty();
             }
 
             public A next() {
-                // TODO
-                 return null;
+                A next = current.head();
+                current = current.tail();
+                return next;
             }
 
             public void remove() {
@@ -115,35 +120,35 @@ public abstract class FList<A> implements Iterable<A> {
 
         @Override
         public A head() {
-            // TODO
-             return null;
+            throw new IllegalArgumentException();
         }
 
         @Override
         public FList<A> tail() {
-            // TODO
-             return null;
+            throw new IllegalArgumentException();
         }
     }
 
     private static final class Cons<A> extends FList<A> {
 
-        // TODO add instance variables
+        private A a;
+        private FList<A> tail;
 
 
         Cons(A a, FList<A> tail) {
+            this.a = a;
+            this.tail = tail;
+
         }
 
         @Override
         public A head() {
-            // TODO
-             return null;
+            return a;
         }
 
         @Override
         public FList<A> tail() {
-            // TODO
-             return null;
+            return tail;
         }
     }
 
