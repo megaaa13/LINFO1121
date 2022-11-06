@@ -1,3 +1,5 @@
+package searching;
+
 import com.github.guillaumederval.javagrading.Grade;
 import com.github.guillaumederval.javagrading.GradeFeedback;
 import com.github.guillaumederval.javagrading.GradingRunnerWithParametersFactory;
